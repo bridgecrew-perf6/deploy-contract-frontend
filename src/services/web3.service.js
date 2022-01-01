@@ -1,6 +1,7 @@
 import Web3 from "web3";
 import { toast } from "../components/toast/Toast.component";
 import Constants from "../constant/constant";
+import EtherscanService from "./etherscan.service";
 const ERC20ABI = require('../bin/ABI/erc20.abi.json');
 
 class Web3Service {
@@ -75,10 +76,11 @@ class Web3Service {
     }
 
     importContract = (data) => {
-        // const { account, setIsDisabled, contractAddress } = data;
+        const { setIsDisabled, contractAddress } = data;
         
         try {
-            // setIsDisabled(false);
+            EtherscanService.getAbi(contractAddress);
+            setIsDisabled(false);
         } catch (error) {
             throw error;
         }

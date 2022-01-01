@@ -11,7 +11,7 @@ import { toast } from './components/toast/Toast.component';
 
 function App() {
 
-  const [wallet, setWallet] = useState({ account: "", network: "", balance: "0 ETH" });
+  const [wallet, setWallet] = useState({ account: "", network: "0", balance: "0 ETH" });
   const [contract, setContract] = useState({ isShowContract: false, address: "" });
   const [isCopied, setIsCopied] = useState(false);
   const [isImportContract, setIsImportContract] = useState(false);
