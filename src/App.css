@@ -46,6 +46,19 @@
   border-bottom: 2px dotted #61dafb;
 }
 
+.form-control {
+  height: 50px !important;
+  border: none !important;
+  color: #282c34 !important;
+  outline: none;
+  font-size: 18px !important;
+}
+
+.form-control:focus {
+  border: none !important;
+  outline: none !important;
+}
+
 .form-label {
   text-align: left !important;
   font-size: 16px !important;
@@ -135,4 +148,6 @@
 
 .walletAddress_top {
   border-top: 2px dotted #61dafb;
+  padding: 15px 15px !important;
+  font-size: 18px !important;
 }

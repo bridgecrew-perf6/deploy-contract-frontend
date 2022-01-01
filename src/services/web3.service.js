@@ -73,6 +73,16 @@ class Web3Service {
             throw error;
         }
     }
+
+    importContract = (data) => {
+        // const { account, setIsDisabled, contractAddress } = data;
+        
+        try {
+            // setIsDisabled(false);
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 export default new Web3Service();

@@ -2,9 +2,9 @@ import React, { useEffect, useCallback, useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-// import Web3Service from "../../services/web3.service";
+import Web3Service from "../../services/web3.service";
 
-const ImportContractForm = ({ wallet, setContract }) => {
+const ImportContractForm = ({ wallet }) => {
     const [isDisabled, setIsDisabled] = useState(false);
 
     const formik = useFormik({
@@ -14,17 +14,15 @@ const ImportContractForm = ({ wallet, setContract }) => {
         },
         validationSchema: Yup.object({
             contractAddress: Yup.string()
-                .min(44, 'Minimum length of name must be 44')
-                .max(44, 'Maximum length of name must be 44')
+                .min(42, 'Minimum length of name must be 42')
+                .max(42, 'Maximum length of name must be 42')
                 .required('This field is required*'),
 
         }),
         onSubmit: values => {
-            // const { deployContract } = Web3Service;
+            const { importContract } = Web3Service;
             setIsDisabled(true);
-            alert(values.contractAddress);
-            // values.symbol = values.symbol.toUpperCase();
-            // deployContract({ ...values, ...wallet, setIsDisabled, setContract });
+            importContract({ ...values, ...wallet, setIsDisabled });
         },
     });
 
@@ -43,10 +41,10 @@ const ImportContractForm = ({ wallet, setContract }) => {
                 <Col sm={12}>
                     <Form.Group className="mb-3" style={{ width: "500px" }}>
                         <Form.Label>Contract</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.contractAddress} type="text" name="contractAddress" id="contractAddress" placeholder="@eg: 0x000000000000000000000000000000" />
+                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.contractAddress} type="text" name="contractAddress" id="contractAddress" placeholder="@eg: 0x087a00B53cdEaE7C40C19E36f52c4D485cAa95f7" />
 
-                        {formik.touched.contractAddress && formik.errors.supply ? (
-                            <div className="error-formik">{formik.errors.name}</div>
+                        {formik.touched.contractAddress && formik.errors.contractAddress ? (
+                            <div className="error-formik">{formik.errors.contractAddress}</div>
                         ) : null}
                     </Form.Group>
                 </Col>
