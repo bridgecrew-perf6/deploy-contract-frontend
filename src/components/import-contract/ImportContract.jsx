@@ -41,7 +41,7 @@ const ImportContract = ({ wallet, setContract }) => {
             <Row>
                 <Col sm={12}>
                     <Form.Group className="mb-3" style={{ width: "500px" }}>
-                        <Form.Label>Supply</Form.Label>
+                        <Form.Label>Contract</Form.Label>
                         <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.contractAddress} type="text" name="contractAddress" id="contractAddress" placeholder="@eg: 0x000000000000000000000000000000" />
 
                         {formik.touched.contractAddress && formik.errors.supply ? (
