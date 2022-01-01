@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
@@ -24,8 +24,8 @@ const FormComponent = ({ wallet, setContract }) => {
                 .required('This field is required*')
                 .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed."),
             supply: Yup.string()
+                .max(8, 'Minimum length of name must be 8')
                 .required('This field is required*'),
-            // .matches(/^[0-9]*$/, "Only numbers are allowed."),
 
         }),
         onSubmit: values => {
@@ -37,8 +37,13 @@ const FormComponent = ({ wallet, setContract }) => {
         },
     });
 
+    const resetForm = useCallback(() => {
+        formik.resetForm();
+    }, [formik])
+
     useEffect(() => {
-        if (!isDisabled) formik.resetForm();  
+        if (!isDisabled) resetForm();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isDisabled])
 
     return (
@@ -85,7 +90,7 @@ const FormComponent = ({ wallet, setContract }) => {
                     <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                 }
 
-                {"  "} Deploy
+                {"  "} { isDisabled ? "Deploying" : "Deploy" }
             </Button>
         </Form>
     )

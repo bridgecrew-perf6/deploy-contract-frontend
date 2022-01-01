@@ -1,4 +1,5 @@
 import Web3 from "web3";
+import { toast } from "../components/toast/Toast.component";
 import Constants from "../constant/constant";
 const ERC20ABI = require('../bin/ABI/erc20.abi.json');
 
@@ -13,10 +14,9 @@ class Web3Service {
                 return new Web3(window.web3.currentProvider);
             }
 
-            alert("Please install your metamask account.");
+            toast.info("Please install your metamask account.");
         } catch (error) {
-            alert('Please refresh your page and try again.!!');
-            throw Error;
+            toast.error(error);
         }
     }
 
@@ -25,8 +25,7 @@ class Web3Service {
             const web3 = await this.initializeWeb3();
             return new web3.eth.net.getId();
         } catch (error) {
-            alert('Please refresh your page and try again.!!');
-            throw Error;
+            toast.error(error);
         }
     }
 
@@ -48,23 +47,21 @@ class Web3Service {
                 from: account,
                 gas: await web3.utils.toHex(estimateGas)
             }, (error, transactionHash) => {
-                if (error) setIsDisabled(false);
-            })
-                .on('error', (error) => {
-                    if (error) setIsDisabled(false);
-                })
-                .on('transactionHash', (transactionHash) => {
-                    txHash = transactionHash;
-                })
-                .on('receipt', (receipt) => {
-                    const { contractAddress } = receipt;
-                    setContract({ isShowContract: true, address: contractAddress });
+                if (error) {
                     setIsDisabled(false);
-                });
+                    toast.error("Transaction has been canncelled, Please try again");
+                };
+            }).on('transactionHash', (transactionHash) => {
+                console.log(`Transaction Hash: ${transactionHash}`);
+            }).on('receipt', (receipt) => {
+                const { contractAddress } = receipt;
+                setContract({ isShowContract: true, address: contractAddress });
+                setIsDisabled(false);
+                toast.success("Contract has been deployed, click to copy your address");
+            });
         } catch (error) {
             setIsDisabled(false);
-            alert('Please refresh your page and try again.!!');
-            throw Error;
+            throw error;
         }
     }
 }

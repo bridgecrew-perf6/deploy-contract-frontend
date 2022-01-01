@@ -5,11 +5,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import FormComponent from './components/form/FormComponent';
 import Web3Service from './services/web3.service';
 import { Toast } from 'react-bootstrap';
+import copy from 'copy-to-clipboard';
 
 function App() {
 
   const [wallet, setWallet] = useState({ account: "", network: "" });
   const [contract, setContract] = useState({ isShowContract: false, address: "" });
+  const [isCopied, setIsCopied] = useState(false);
 
   const accountChanged = useCallback(async () => {
     window.ethereum.on('accountsChanged', async (accounts) => {
@@ -38,6 +40,15 @@ function App() {
     }
   }, []);
 
+  const copyToClipboard = (address) => {
+    copy(address);
+    setIsCopied(true);
+    setTimeout(() => {
+      setContract({ isShowContract: false, address: "" });
+      setIsCopied(false);
+    }, 2000)
+  }
+
   useEffect(() => {
     if (!window.ethereum) return;
     accountChanged();
@@ -54,8 +65,12 @@ function App() {
         contract.isShowContract &&
         <Toast>
           <Toast.Body>
-            <p className='toastmessage'>
-              Contract Address:- {" "} {contract.address}
+            <p className='toastmessage' onClick={copyToClipboard}>
+              {
+                isCopied ?
+                  <small>Copied...!!</small> :
+                  <small>Contract Address:- {" "} {contract.address}</small>
+              }
             </p>
           </Toast.Body>
         </Toast>

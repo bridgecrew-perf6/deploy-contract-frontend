@@ -77,6 +77,12 @@
   padding: 10px 0px 0px 0px;
   width: 100%;
   text-align: center !important;
+  cursor: pointer;
+}
+
+.toastmessage:hover {
+  text-decoration: underline;
+  color: #61dafb;
 }
 
 .toast {
