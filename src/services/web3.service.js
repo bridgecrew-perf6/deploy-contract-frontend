@@ -11,12 +11,21 @@ class Web3Service {
             if ((ethereum) && (ethereum.isMetaMask)) {
                 return new Web3(ethereum);
             } else if (web3) {
-                return new Web3(window.web3.currentProvider);
+                return new Web3(window.web3.givenProvider);
             }
 
             toast.info("Please install your metamask account.");
         } catch (error) {
             toast.error(error);
+        }
+    }
+
+    getWalletBalance = async (walletAddress) => {
+        try {
+            const web3 = await this.initializeWeb3();
+            return await web3.eth.getBalance(walletAddress);
+        } catch (error) {
+            throw error;
         }
     }
 

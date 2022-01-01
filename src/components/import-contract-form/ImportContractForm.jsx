@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 // import Web3Service from "../../services/web3.service";
 
-const ImportContract = ({ wallet, setContract }) => {
+const ImportContractForm = ({ wallet, setContract }) => {
     const [isDisabled, setIsDisabled] = useState(false);
 
     const formik = useFormik({
@@ -22,6 +22,7 @@ const ImportContract = ({ wallet, setContract }) => {
         onSubmit: values => {
             // const { deployContract } = Web3Service;
             setIsDisabled(true);
+            alert(values.contractAddress);
             // values.symbol = values.symbol.toUpperCase();
             // deployContract({ ...values, ...wallet, setIsDisabled, setContract });
         },
@@ -63,4 +64,4 @@ const ImportContract = ({ wallet, setContract }) => {
     )
 }
 
-export default ImportContract;
+export default ImportContractForm;

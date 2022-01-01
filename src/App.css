@@ -36,7 +36,7 @@
 
 .erc20_token h2 {
   color: #61dafb;
-  padding: 20px 0px;
+  padding: 10px 0px 20px 0px;
   border-bottom: 2px dotted #61dafb;
 }
 
@@ -112,4 +112,27 @@
 
 .outer_import_div .import-contract:hover {
   background-color: #61dafb !important;
+}
+
+.outer_import_div .wallet-balance {
+  margin-top: 10px;
+  margin-bottom: 50px !important;
+  background-color: #282c34 !important;
+  color: #61dafb !important;
+  border: none;
+  padding: 10px 50px !important;
+  font-size: 22px;
+  font-weight: bolder !important;
+  position: absolute;
+  left: 20px;
+  top: 10px
+}
+
+.outer_import_div .wallet-balance:disabled {
+  background-color: #282c34;
+  color: #61dafb !important;
+}
+
+.walletAddress_top {
+  border-top: 2px dotted #61dafb;
 }
