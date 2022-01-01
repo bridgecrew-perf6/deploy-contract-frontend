@@ -93,3 +93,23 @@
   border-radius: none;
 }
  
+.outer_import_div {
+  position: relative;
+}
+
+.outer_import_div .import-contract {
+  margin-top: 10px;
+  margin-bottom: 50px !important;
+  background-color: #fff !important;
+  color: #282c34 !important;
+  padding: 10px 50px !important;
+  font-size: 16px;
+  font-weight: bold !important;
+  position: absolute;
+  right: 20px;
+  top: 10px
+}
+
+.outer_import_div .import-contract:hover {
+  background-color: #61dafb !important;
+}

@@ -2,16 +2,18 @@ import React, { useCallback, useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import FormComponent from './components/form/FormComponent';
+import Erc20Form from './components/erc20-form/Erc20Form';
 import Web3Service from './services/web3.service';
-import { Toast } from 'react-bootstrap';
+import { Button, Toast } from 'react-bootstrap';
 import copy from 'copy-to-clipboard';
+import ImportContract from './components/import-contract/ImportContract';
 
 function App() {
 
   const [wallet, setWallet] = useState({ account: "", network: "" });
   const [contract, setContract] = useState({ isShowContract: false, address: "" });
   const [isCopied, setIsCopied] = useState(false);
+  const [isImportContract, setIsImportContract] = useState(false);
 
   const accountChanged = useCallback(async () => {
     window.ethereum.on('accountsChanged', async (accounts) => {
@@ -49,6 +51,10 @@ function App() {
     }, 2000)
   }
 
+  const importContract = (toggleImportContract) => {
+    setIsImportContract(!toggleImportContract);
+  }
+
   useEffect(() => {
     if (!window.ethereum) return;
     accountChanged();
@@ -76,15 +82,24 @@ function App() {
         </Toast>
       }
 
+      <div className='outer_import_div'>
+        <Button onClick={importContract.bind(this, isImportContract)} className='import-contract'>
+          {isImportContract ? "Import Contract" : "Deploy Token"}
+        </Button>
+      </div>
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div className='erc20_token'>
-          <h2>Deploy Your ERC20 Token</h2>
-          <p>Add Details & Get Your Own Erc20 Token</p>
+          <h2> {isImportContract ? "Import Your Contract" : "Deploy ERC20 Token"} </h2>
+          <p> {isImportContract ? "Enter Contract Address & Access." : "Add Details & Get Your Own Erc20 Token"} </p>
         </div>
 
-
-        <FormComponent wallet={wallet} setContract={setContract} />
+        {
+          !isImportContract ?
+            <Erc20Form wallet={wallet} setContract={setContract} /> :
+            <ImportContract wallet={wallet} setContract={setContract} />
+        }
       </header>
     </div>
   );
