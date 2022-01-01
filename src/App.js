@@ -65,7 +65,7 @@ function App() {
         contract.isShowContract &&
         <Toast>
           <Toast.Body>
-            <p className='toastmessage' onClick={copyToClipboard}>
+            <p className='toastmessage' onClick={copyToClipboard.bind(this, contract.address)}>
               {
                 isCopied ?
                   <small>Copied...!!</small> :
