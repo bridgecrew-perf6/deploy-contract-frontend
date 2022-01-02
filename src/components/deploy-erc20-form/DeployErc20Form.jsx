@@ -84,14 +84,17 @@ const DeployErc20Form = ({ wallet, setContract }) => {
                 </Col>
             </Row>
 
-            <Button type="submit" className="btn_submit" disabled={isDisabled}>
-                {
-                    isDisabled &&
-                    <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-                }
+            <div className="text-center">
+                <Button type="submit" className="btn_submit" disabled={isDisabled}>
+                    {
+                        isDisabled &&
+                        <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                    }
 
-                {"  "} { isDisabled ? "Deploying" : "Deploy" }
-            </Button>
+                    {"  "} {isDisabled ? "Deploying" : "Deploy"}
+                </Button>
+            </div>
+
         </Form>
     )
 }

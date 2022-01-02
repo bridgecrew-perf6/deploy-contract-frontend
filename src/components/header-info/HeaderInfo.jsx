@@ -11,8 +11,8 @@ const HeaderInfo = ({ isDeployContractOrErc20, logo, wallet }) => {
                     <p className='walletAddress_top'> Wallet:- {" "} {wallet.account} </p>
                 }
 
-                <h2> {isDeployContractOrErc20 ? "Import Your Contract" : "Deploy ERC20 Token"} </h2>
-                <p> {isDeployContractOrErc20 ? "Enter Contract Address & Access." : "Add Details & Get Your Own Erc20 Token"} </p>
+                <h2> {isDeployContractOrErc20 ? "Deploy Contract" : "Deploy Token"} </h2>
+                <p> {isDeployContractOrErc20 ? "Add Details & Deploy Smart Contract." : "Add Details & Get Your Own Erc20 Token"} </p>
             </div>      </>
     )
 }

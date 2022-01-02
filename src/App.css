@@ -22,7 +22,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  width: 100%;
+  min-width: 100% !important;
 }
 
 @keyframes App-logo-spin {
@@ -46,11 +46,17 @@
   border-bottom: 2px dotted #61dafb;
 }
 
+form {
+  text-align: left !important;
+  width: 35%;
+}
+
 .form-control {
   height: 50px !important;
   border: none !important;
   color: #282c34 !important;
   outline: none;
+  border-radius: 8px !important;
   font-size: 18px !important;
 }
 
@@ -70,8 +76,9 @@
   margin-bottom: 50px !important;
   background-color: #fff !important;
   color: #282c34 !important;
-  padding: 10px 50px !important;
-  font-size: 16px;
+  padding: 14px 50px !important;
+  border-radius: 8px !important;
+  font-size: 18px;
   font-weight: bold !important;
 }
 
