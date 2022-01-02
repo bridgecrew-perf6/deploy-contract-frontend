@@ -69,9 +69,9 @@ function App() {
       <div className='outer_import_div'>
         <WalletDetails wallet={wallet} />
 
-        <Button onClick={toggleDeploy.bind(this, isDeployContractOrErc20)} className='import-contract'>
+        {/* <Button onClick={toggleDeploy.bind(this, isDeployContractOrErc20)} className='import-contract'>
           {!isDeployContractOrErc20 ? "Deploy Contract" : "Deploy Token"}
-        </Button>
+        </Button> */}
       </div>
 
       <header className="App-header">

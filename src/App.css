@@ -118,20 +118,29 @@ form {
 }
 
 .outer_import_div .import-contract {
-  margin-top: 10px;
   margin-bottom: 50px !important;
-  background-color: #fff !important;
-  color: #282c34 !important;
+  background-color: #282c34 !important;
+  color: #61dafb !important;
+  border: none;
+  outline: none;
   padding: 10px 50px !important;
-  font-size: 16px;
+  font-size: 18px;
+  border-radius: 8px !important;
   font-weight: bold !important;
   position: absolute;
-  right: 20px;
-  top: 10px
+  left: 20px;
+  top: 53px;
 }
 
 .outer_import_div .import-contract:hover {
   background-color: #61dafb !important;
+  color: #282c34 !important;
+}
+
+.outer_import_div .import-contract:active, .import-contract:focus {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .outer_import_div .wallet-balance {
@@ -143,7 +152,7 @@ form {
   font-size: 22px;
   font-weight: bolder !important;
   position: absolute;
-  left: 20px;
+  right: 20px;
   top: 10px;
   text-align: left !important;
 }

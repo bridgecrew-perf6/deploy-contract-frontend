@@ -2,7 +2,6 @@ import React, { useEffect, useCallback, useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import Web3Service from "../../services/web3.service";
 
 const DeployContractFrorm = ({ wallet, setContract }) => {
     const [isDisabled, setIsDisabled] = useState(false);
@@ -10,13 +9,13 @@ const DeployContractFrorm = ({ wallet, setContract }) => {
     const formik = useFormik({
         initialValues: {
             bytecode: "",
+            abi: {}
 
         },
         validationSchema: Yup.object({
             bytecode: Yup.string()
                 .required('This field is required*')
                 .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed."),
-
         }),
         onSubmit: values => {
             setIsDisabled(true);
@@ -34,6 +33,19 @@ const DeployContractFrorm = ({ wallet, setContract }) => {
 
     return (
         <Form onSubmit={formik.handleSubmit} autoComplete="off" className="form_v1">
+            <Row>
+                <Col sm={12}>
+                    <Form.Group className="mb-3">
+                        <Form.Label>Upload ABI .json File</Form.Label>
+                        {/* <Form.File disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.abi} type="file" name="abi" id="abi" placeholder="@eg: .json file....." /> */}
+
+                        {formik.touched.abi && formik.errors.abi ? (
+                            <div className="error-formik">{formik.errors.abi}</div>
+                        ) : null}
+                    </Form.Group>
+                </Col>
+            </Row>
+
             <Row>
                 <Col sm={12}>
                     <Form.Group className="mb-3">

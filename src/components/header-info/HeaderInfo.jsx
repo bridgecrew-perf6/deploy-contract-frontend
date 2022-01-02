@@ -10,7 +10,7 @@ const HeaderInfo = ({ isDeployContractOrErc20, logo, wallet }) => {
                     wallet.account.length > 0 &&
                     <p className='walletAddress_top'> Wallet:- {" "} {wallet.account} </p>
                 }
-
+    
                 <h2> {isDeployContractOrErc20 ? "Deploy Contract" : "Deploy Token"} </h2>
                 <p> {isDeployContractOrErc20 ? "Add Details & Deploy Smart Contract." : "Add Details & Get Your Own Erc20 Token"} </p>
             </div>      </>
