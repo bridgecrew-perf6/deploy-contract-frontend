@@ -52,7 +52,7 @@ const DeployErc20Form = ({ wallet, setContract }) => {
                 <Col sm={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} type="text" name="name" id="name" placeholder="@eg: USDT" />
+                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name.toUpperCase()} type="text" name="name" id="name" placeholder="@eg: USDT" />
 
                         {formik.touched.name && formik.errors.name ? (
                             <div className="error-formik">{formik.errors.name}</div>
@@ -62,7 +62,7 @@ const DeployErc20Form = ({ wallet, setContract }) => {
                 <Col sm={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Symbol</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.symbol} type="text" name="symbol" id="symbol" placeholder="@eg: USDT" />
+                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.symbol.toUpperCase()} type="text" name="symbol" id="symbol" placeholder="@eg: USDT" />
 
                         {formik.touched.symbol && formik.errors.symbol ? (
                             <div className="error-formik">{formik.errors.name}</div>

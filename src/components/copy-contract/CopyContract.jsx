@@ -24,7 +24,7 @@ const CopyContract = ({ contract, setContract }) => {
                             {
                                 isCopied ?
                                     <small>Copied...!!</small> :
-                                    <small>ImportContractForm Address:- {" "} {contract.address}</small>
+                                    <small>Contract Address:- {" "} {contract.address}</small>
                             }
                         </p>
                     </Toast.Body>

@@ -4,7 +4,6 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DeployErc20Form from './components/deploy-erc20-form/DeployErc20Form';
 import Web3Service from './services/web3.service';
-import { Button } from 'react-bootstrap';
 import { toast } from './components/toast/Toast.component';
 import DeployContractFrorm from './components/deploy-contract-form/DeployContractFrorm';
 import CopyContract from './components/copy-contract/CopyContract';
