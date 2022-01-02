@@ -51,8 +51,15 @@ form {
   width: 35%;
 }
 
-.form-control {
-  height: 50px !important;
+.file-input {
+  height: 50px;
+  padding-top: 12px !important;
+  border: none !important;
+  outline: none;
+}
+
+.input-form-control {
+  height: 50px;
   border: none !important;
   color: #282c34 !important;
   outline: none;
@@ -60,9 +67,10 @@ form {
   font-size: 18px !important;
 }
 
-.form-control:focus {
+.input-form-control:focus {
   border: none !important;
   outline: none !important;
+  box-shadow: none !important;
 }
 
 .form-label {

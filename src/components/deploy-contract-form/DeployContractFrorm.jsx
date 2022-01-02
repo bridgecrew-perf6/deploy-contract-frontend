@@ -2,15 +2,15 @@ import React, { useEffect, useCallback, useState } from "react";
 import { Button, Col, Form, Row, Spinner } from "react-bootstrap";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import { toast } from "../toast/Toast.component";
 
 const DeployContractFrorm = ({ wallet, setContract }) => {
     const [isDisabled, setIsDisabled] = useState(false);
+    const [fileData, setFileData] = useState(null);
 
     const formik = useFormik({
         initialValues: {
             bytecode: "",
-            abi: {}
-
         },
         validationSchema: Yup.object({
             bytecode: Yup.string()
@@ -18,13 +18,32 @@ const DeployContractFrorm = ({ wallet, setContract }) => {
                 .matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed."),
         }),
         onSubmit: values => {
-            setIsDisabled(true);
+            console.log(values);
+            if (fileData === null) return toast.info("Please upload your ABI file (.json) format.");
         },
     });
 
     const resetForm = useCallback(() => {
         formik.resetForm();
     }, [formik])
+
+    const uploadAbi = (e) => {
+        if (e.target.files.length === 0) return toast.info("Please enter a valid .json format file.")
+        const file = e.target.files[0];
+        fileReaderOnUpload(file);
+    }
+
+    const fileReaderOnUpload = (file) => {
+        const fileReader = new FileReader();
+        fileReader.readAsText(file, "UTF-8");
+        fileReader.onload = e => {
+            let { result } = e.target;
+            result = JSON.parse(result);
+            if (result.length === 0) return toast.error("Please enter a valid ABI file (.json) format, Current file don't have any inputs");
+            result = result[0].inputs;
+            setFileData(result);
+        };
+    }
 
     useEffect(() => {
         if (!isDisabled) resetForm();
@@ -36,8 +55,8 @@ const DeployContractFrorm = ({ wallet, setContract }) => {
             <Row>
                 <Col sm={12}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Upload ABI .json File</Form.Label>
-                        {/* <Form.File disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.abi} type="file" name="abi" id="abi" placeholder="@eg: .json file....." /> */}
+                        <Form.Label>Upload ABI (.json format)</Form.Label>
+                        <Form.Control className="file-input" type="file" name="abi" id="abi" disabled={isDisabled} onChange={uploadAbi} />
 
                         {formik.touched.abi && formik.errors.abi ? (
                             <div className="error-formik">{formik.errors.abi}</div>
@@ -46,11 +65,29 @@ const DeployContractFrorm = ({ wallet, setContract }) => {
                 </Col>
             </Row>
 
+            {
+                fileData?.map((row) => (
+                    <Row>
+                        <Col sm={12}>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Upload ABI (.json format)</Form.Label>
+                                <Form.Control className="file-input" type="file" name="abi" id="abi" disabled={isDisabled} onChange={uploadAbi} />
+
+                                {formik.touched.abi && formik.errors.abi ? (
+                                    <div className="error-formik">{formik.errors.abi}</div>
+                                ) : null}
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                ))
+            }
+
             <Row>
                 <Col sm={12}>
                     <Form.Group className="mb-3">
                         <Form.Label>Bytecode</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.bytecode} as="textarea" name="bytecode" id="bytecode" placeholder="@eg: 0x0x0x00000000000000000000000000000000000....." />
+                        <Form.Control rows={4} disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.bytecode} as="textarea" name="bytecode" id="bytecode" placeholder="@eg: 0x0x0x00000000000000000000000000000000000....." />
 
                         {formik.touched.bytecode && formik.errors.bytecode ? (
                             <div className="error-formik">{formik.errors.bytecode}</div>

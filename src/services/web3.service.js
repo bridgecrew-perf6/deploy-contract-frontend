@@ -15,7 +15,7 @@ class Web3Service {
                 return new Web3(window.web3.givenProvider);
             }
 
-            toast.info("Please install your metamask account.");
+            toast.info("Please install metamask extention.");
         } catch (error) {
             toast.error(error);
         }

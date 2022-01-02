@@ -9,6 +9,7 @@ import DeployContractFrorm from './components/deploy-contract-form/DeployContrac
 import CopyContract from './components/copy-contract/CopyContract';
 import WalletDetails from './components/wallet-detail/WalletDetails';
 import HeaderInfo from './components/header-info/HeaderInfo';
+import { Button } from 'react-bootstrap';
 
 function App() {
 
@@ -55,7 +56,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!window.ethereum) return toast.info("Please install metamask link.");
+    if (!window.ethereum) return toast.info("Please install metamask extention.");
     accountChanged();
     networkChanged();
     getAddress();
@@ -68,9 +69,9 @@ function App() {
       <div className='outer_import_div'>
         <WalletDetails wallet={wallet} />
 
-        {/* <Button onClick={toggleDeploy.bind(this, isDeployContractOrErc20)} className='import-contract'>
+        <Button onClick={toggleDeploy.bind(this, isDeployContractOrErc20)} className='import-contract'>
           {!isDeployContractOrErc20 ? "Deploy Contract" : "Deploy Token"}
-        </Button> */}
+        </Button>
       </div>
 
       <header className="App-header">

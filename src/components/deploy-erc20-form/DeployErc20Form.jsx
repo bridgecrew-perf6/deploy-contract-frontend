@@ -52,7 +52,7 @@ const DeployErc20Form = ({ wallet, setContract }) => {
                 <Col sm={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name.toUpperCase()} type="text" name="name" id="name" placeholder="@eg: USDT" />
+                        <Form.Control className="input-form-control" disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name.toUpperCase()} type="text" name="name" id="name" placeholder="@eg: USDT" />
 
                         {formik.touched.name && formik.errors.name ? (
                             <div className="error-formik">{formik.errors.name}</div>
@@ -62,7 +62,7 @@ const DeployErc20Form = ({ wallet, setContract }) => {
                 <Col sm={6}>
                     <Form.Group className="mb-3">
                         <Form.Label>Symbol</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.symbol.toUpperCase()} type="text" name="symbol" id="symbol" placeholder="@eg: USDT" />
+                        <Form.Control className="input-form-control" disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.symbol.toUpperCase()} type="text" name="symbol" id="symbol" placeholder="@eg: USDT" />
 
                         {formik.touched.symbol && formik.errors.symbol ? (
                             <div className="error-formik">{formik.errors.name}</div>
@@ -75,7 +75,7 @@ const DeployErc20Form = ({ wallet, setContract }) => {
                 <Col sm={12}>
                     <Form.Group className="mb-3">
                         <Form.Label>Supply</Form.Label>
-                        <Form.Control disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.supply} type="text" name="supply" id="supply" placeholder="@eg: 1000000000000" />
+                        <Form.Control className="input-form-control" disabled={isDisabled} onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.supply} type="text" name="supply" id="supply" placeholder="@eg: 1000000000000" />
 
                         {formik.touched.supply && formik.errors.supply ? (
                             <div className="error-formik">{formik.errors.name}</div>
