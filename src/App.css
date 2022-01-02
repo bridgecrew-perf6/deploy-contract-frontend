@@ -128,7 +128,6 @@
 }
 
 .outer_import_div .wallet-balance {
-  margin-top: 10px;
   margin-bottom: 50px !important;
   background-color: #282c34 !important;
   color: #61dafb !important;
@@ -138,7 +137,8 @@
   font-weight: bolder !important;
   position: absolute;
   left: 20px;
-  top: 10px
+  top: 10px;
+  text-align: left !important;
 }
 
 .outer_import_div .wallet-balance:disabled {

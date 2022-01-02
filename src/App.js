@@ -2,31 +2,25 @@ import React, { useCallback, useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Erc20Form from './components/erc20-form/Erc20Form';
+import DeployErc20Form from './components/deploy-erc20-form/DeployErc20Form';
 import Web3Service from './services/web3.service';
-import { Button, Toast } from 'react-bootstrap';
-import copy from 'copy-to-clipboard';
-import ImportContractForm from './components/import-contract-form/ImportContractForm';
+import { Button } from 'react-bootstrap';
 import { toast } from './components/toast/Toast.component';
+import DeployContractFrorm from './components/deploy-contract-form/DeployContractFrorm';
+import CopyContract from './components/copy-contract/CopyContract';
+import WalletDetails from './components/wallet-detail/WalletDetails';
+import HeaderInfo from './components/header-info/HeaderInfo';
 
 function App() {
 
   const [wallet, setWallet] = useState({ account: "", network: "0", balance: "0 ETH" });
   const [contract, setContract] = useState({ isShowContract: false, address: "" });
-  const [isCopied, setIsCopied] = useState(false);
-  const [isImportContract, setIsImportContract] = useState(false);
+  const [isDeployContractOrErc20, setIsDeployContractOrErc20] = useState(false);
 
-  const copyToClipboard = (address) => {
-    copy(address);
-    setIsCopied(true);
-    setTimeout(() => {
-      setContract({ isShowContract: false, address: "" });
-      setIsCopied(false);
-    }, 2000)
-  }
 
-  const importContract = (toggleImportContract) => {
-    setIsImportContract(!toggleImportContract);
+
+  const toggleDeploy = (toggleImportContract) => {
+    setIsDeployContractOrErc20(!toggleImportContract);
   }
 
   const getWalletDetails = async () => {
@@ -70,55 +64,28 @@ function App() {
 
   return (
     <div className="App">
-      {
-        contract.isShowContract &&
-        <Toast>
-          <Toast.Body>
-            <p className='toastmessage' onClick={copyToClipboard.bind(this, contract.address)}>
-              {
-                isCopied ?
-                  <small>Copied...!!</small> :
-                  <small>ImportContractForm Address:- {" "} {contract.address}</small>
-              }
-            </p>
-          </Toast.Body>
-        </Toast>
-      }
+      <CopyContract contract={contract} setContract={setContract} />
 
       <div className='outer_import_div'>
-        <Button disabled className='wallet-balance'>
-          Balance: {" "}
-          {
-            !isNaN(parseFloat(wallet.balance / (10 ** 18))) ?
-              parseFloat(wallet.balance / (10 ** 18)).toFixed(4)
-              : "0 ETH"
-          }
+        <WalletDetails wallet={wallet} />
 
-          {" - "}
-          Network: {wallet.network}
-        </Button>
-
-        <Button onClick={importContract.bind(this, isImportContract)} className='import-contract'>
-          {!isImportContract ? "Import Contract" : "Deploy Token"}
+        <Button onClick={toggleDeploy.bind(this, isDeployContractOrErc20)} className='import-contract'>
+          {!isDeployContractOrErc20 ? "Deploy Contract" : "Deploy Token"}
         </Button>
       </div>
 
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div className='erc20_token'>
-          {
-            wallet.account.length > 0 &&
-            <p className='walletAddress_top'> Wallet:- {" "} {wallet.account} </p>
-          }
-
-          <h2> {isImportContract ? "Import Your Contract" : "Deploy ERC20 Token"} </h2>
-          <p> {isImportContract ? "Enter Contract Address & Access." : "Add Details & Get Your Own Erc20 Token"} </p>
-        </div>
+        <HeaderInfo 
+          isDeployContractOrErc20={isDeployContractOrErc20} 
+          logo={logo}
+          wallet={wallet}
+        />
 
         {
-          !isImportContract ?
-            <Erc20Form wallet={wallet} setContract={setContract} /> :
-            <ImportContractForm wallet={wallet} setContract={setContract} />
+          !isDeployContractOrErc20 ?
+            <DeployErc20Form wallet={wallet} setContract={setContract} /> :
+            <DeployContractFrorm wallet={wallet} setContract={setContract} />
+          // <ImportContractForm wallet={wallet} setContract={setContract} />
         }
       </header>
     </div>

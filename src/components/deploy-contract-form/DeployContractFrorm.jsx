@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import Web3Service from "../../services/web3.service";
 
-const Erc20Form = ({ wallet, setContract }) => {
+const DeployContractFrorm = ({ wallet, setContract }) => {
     const [isDisabled, setIsDisabled] = useState(false);
 
     const formik = useFormik({
@@ -96,4 +96,4 @@ const Erc20Form = ({ wallet, setContract }) => {
     )
 }
 
-export default Erc20Form;
+export default DeployContractFrorm;
